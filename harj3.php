@@ -9,6 +9,10 @@ $sql = "SELECT * FROM prhe";
 $statement = $dbcon->prepare($sql);
 $statement->execute();
 
+$resp = new stdClass();
+$resp->$ptunRow = "ptun";
+$resp->$htun = "htun";
+
 $ptunRow = $statement->fetch(PDO::FETCH_ASSOC);
 $ptun = $ptunRow["ptun"];
 
@@ -18,12 +22,12 @@ $statement->execute();
 
 $htuns =  $statement->fetchAll(PDO::FETCH_COLUMN);
 
-$responseJSON = json_encode($response);
+$json = json_encode($resp);
 header('Content-type: application/json');
 
-echo $responseJSON;
+echo $json;
 
-echo "<h3>".$ptunRow["htun"]."</h3>";
+// echo "<h3>".$ptunRow["htun"]."</h3>";
 
 foreach($htuns as $htun){
     echo $htun;
